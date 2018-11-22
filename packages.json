@@ -1,0 +1,549 @@
+{
+    "packageId": "1d1efafcd31009",
+    "name": "",
+    "description": "",
+    "buttons": [
+        {
+            "buttonId": "235a83304e4dc8",
+            "name": "key instruction",
+            "description": "key release instruction",
+            "type": "action",
+            "questions": [
+                {
+                    "question": "Which Apartment?",
+                    "type": "user",
+                    "values": {},
+                    "validators": [],
+                    "compulsory": true,
+                    "questionId": "1a200b488ebc4d",
+                    "number": 1
+                },
+                {
+                    "question": "who are you releasing it to?",
+                    "type": "freetext",
+                    "values": {
+                        "format": "medium"
+                    },
+                    "validators": [],
+                    "compulsory": true,
+                    "questionId": "26d3ba2ef67aa2",
+                    "number": 2
+                },
+                {
+                    "question": "when do you expect them to come?",
+                    "type": "datetime",
+                    "values": {
+                        "options": [
+                            "time",
+                            "date"
+                        ]
+                    },
+                    "validators": [],
+                    "questionId": "29e8ec896bba88",
+                    "number": 3
+                },
+                {
+                    "question": "contact number in emergency",
+                    "type": "freetext",
+                    "values": {
+                        "format": "sms"
+                    },
+                    "validators": [],
+                    "compulsory": true,
+                    "questionId": "978bdce04edfb",
+                    "number": 4
+                },
+                {
+                    "question": "would you like to test the number?",
+                    "type": "options",
+                    "values": {
+                        "options": [
+                            "yes",
+                            "no"
+                        ],
+                        "multiple": "single",
+                        "none": false
+                    },
+                    "validators": [],
+                    "compulsory": true,
+                    "questionId": "16c6b1214768f8",
+                    "number": 5
+                }
+            ],
+            "navigation": {
+                "id": "1a200b488ebc4d",
+                "type": "node",
+                "parent": null,
+                "children": [
+                    {
+                        "id": "26d3ba2ef67aa2",
+                        "type": "node",
+                        "parent": "1a200b488ebc4d",
+                        "children": [
+                            {
+                                "id": "29e8ec896bba88",
+                                "type": "node",
+                                "parent": "26d3ba2ef67aa2",
+                                "children": [
+                                    {
+                                        "id": "978bdce04edfb",
+                                        "type": "node",
+                                        "parent": "29e8ec896bba88",
+                                        "children": [
+                                            {
+                                                "id": "16c6b1214768f8",
+                                                "type": "node",
+                                                "parent": "978bdce04edfb",
+                                                "children": [
+                                                    {
+                                                        "id": "2bd0916422ddf",
+                                                        "type": "node",
+                                                        "parent": "16c6b1214768f8",
+                                                        "children": [
+                                                            {
+                                                                "id": "2eaff6e2f1aee6",
+                                                                "type": "node",
+                                                                "parent": "2bd0916422ddf",
+                                                                "children": [],
+                                                                "rules": []
+                                                            }
+                                                        ],
+                                                        "rules": [
+                                                            {
+                                                                "type": "options",
+                                                                "values": [
+                                                                    "yes"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "2ff08665533e8e",
+                                                        "type": "node",
+                                                        "parent": "16c6b1214768f8",
+                                                        "children": [],
+                                                        "rules": [
+                                                            {
+                                                                "type": "options",
+                                                                "values": [
+                                                                    "no"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "rules": []
+                                            }
+                                        ],
+                                        "rules": []
+                                    }
+                                ],
+                                "rules": []
+                            }
+                        ],
+                        "rules": []
+                    }
+                ]
+            },
+            "webhooks": [
+                {
+                    "name": "notify endpoint",
+                    "type": "notify",
+                    "url": "http://buttonkit:8080/api/v1/send",
+                    "method": "POST",
+                    "parameters": {
+                        "dynamic": [
+                            {
+                                "name": "contact number in emergency",
+                                "type": "freetext",
+                                "id": "978bdce04edfb",
+                                "path": ""
+                            }
+                        ],
+                        "static": {
+                            "email": {
+                                "subject": "",
+                                "body": ""
+                            },
+                            "sms": {
+                                "body": "this is a key release pickup test"
+                            },
+                            "recipients": []
+                        }
+                    },
+                    "webhookId": "2bd0916422ddf"
+                },
+                {
+                    "name": "log endpoint",
+                    "type": "log",
+                    "url": "http://buttonkit:8080/api/v1/datastore/log",
+                    "method": "POST",
+                    "contentType": "json",
+                    "parameters": {
+                        "dynamic": [
+                            "presser",
+                            "pressed"
+                        ],
+                        "static": {
+                            "_datastorename": "releaseinstructions"
+                        }
+                    },
+                    "webhookId": "2ff08665533e8e"
+                },
+                {
+                    "name": "log endpoint",
+                    "type": "log",
+                    "url": "http://buttonkit:8080/api/v1/datastore/log",
+                    "method": "POST",
+                    "contentType": "json",
+                    "parameters": {
+                        "dynamic": [
+                            "presser",
+                            "pressed"
+                        ],
+                        "static": {
+                            "_datastorename": "releaseinstructions"
+                        }
+                    },
+                    "webhookId": "2eaff6e2f1aee6"
+                }
+            ]
+        },
+        {
+            "buttonId": "fbe5c4821f0b88",
+            "name": "key pickup",
+            "description": "button description",
+            "type": "action",
+            "questions": [
+                {
+                    "question": "pending pickups",
+                    "type": "datastoreitem",
+                    "values": {
+                        "storeId": "releaseinstructions",
+                        "schema": [
+                            {
+                                "id": "1a200b488ebc4d",
+                                "path": "1a200b488ebc4d",
+                                "alias": "key owner"
+                            },
+                            {
+                                "id": "26d3ba2ef67aa2",
+                                "path": "26d3ba2ef67aa2",
+                                "alias": "recipient"
+                            },
+                            {
+                                "id": "29e8ec896bba88",
+                                "path": "29e8ec896bba88",
+                                "alias": "expected time"
+                            },
+                            {
+                                "id": "978bdce04edfb",
+                                "path": "978bdce04edfb",
+                                "alias": "owner contact"
+                            }
+                        ]
+                    },
+                    "validators": [],
+                    "questionId": "e1ee683f030e08",
+                    "number": 1
+                },
+                {
+                    "question": "please provide your signature",
+                    "type": "signature",
+                    "values": {},
+                    "validators": [],
+                    "questionId": "d54813ecd51cd8",
+                    "number": 2
+                },
+                {
+                    "question": "your contact number",
+                    "type": "freetext",
+                    "values": {
+                        "format": "sms"
+                    },
+                    "validators": [],
+                    "compulsory": true,
+                    "questionId": "9a75383b0fdc5",
+                    "number": 3
+                }
+            ],
+            "navigation": {
+                "id": "e1ee683f030e08",
+                "type": "node",
+                "parent": null,
+                "children": [
+                    {
+                        "id": "d54813ecd51cd8",
+                        "type": "node",
+                        "parent": "e1ee683f030e08",
+                        "children": [
+                            {
+                                "id": "9a75383b0fdc5",
+                                "type": "node",
+                                "parent": "d54813ecd51cd8",
+                                "children": [
+                                    {
+                                        "id": "4f9fa7b6373e74",
+                                        "type": "node",
+                                        "parent": "9a75383b0fdc5",
+                                        "children": [
+                                            {
+                                                "id": "1f7b4eb71bb215",
+                                                "type": "node",
+                                                "parent": "4f9fa7b6373e74",
+                                                "children": [],
+                                                "rules": []
+                                            }
+                                        ],
+                                        "rules": []
+                                    }
+                                ],
+                                "rules": []
+                            }
+                        ],
+                        "rules": []
+                    }
+                ]
+            },
+            "webhooks": [
+                {
+                    "name": "log endpoint",
+                    "type": "log",
+                    "url": "http://buttonkit:8080/api/v1/datastore/log",
+                    "method": "POST",
+                    "contentType": "json",
+                    "parameters": {
+                        "dynamic": [
+                            "presser",
+                            "pressed"
+                        ],
+                        "static": {
+                            "_datastorename": "currentpickups"
+                        }
+                    },
+                    "webhookId": "4f9fa7b6373e74"
+                },
+                {
+                    "name": "delete log item",
+                    "type": "deletelogitem",
+                    "url": "http://buttonkit:8080/api/v1/datastore/delete/question",
+                    "method": "POST",
+                    "parameters": {
+                        "dynamic": [
+                            "e1ee683f030e08"
+                        ],
+                        "static": {
+                            "questionId": "e1ee683f030e08"
+                        }
+                    },
+                    "webhookId": "1f7b4eb71bb215"
+                }
+            ]
+        },
+        {
+            "buttonId": "13592d3317066d",
+            "name": "keys out",
+            "description": "keys currently out",
+            "type": "action",
+            "questions": [
+                {
+                    "question": "keys out",
+                    "type": "datastoreitem",
+                    "values": {
+                        "storeId": "currentpickups",
+                        "schema": [
+                            {
+                                "id": "26d3ba2ef67aa2",
+                                "path": "e1ee683f030e08,26d3ba2ef67aa2",
+                                "alias": "person with key"
+                            },
+                            {
+                                "id": "1a200b488ebc4d",
+                                "path": "e1ee683f030e08,1a200b488ebc4d",
+                                "alias": "key owner"
+                            },
+                            {
+                                "id": "d54813ecd51cd8",
+                                "path": "d54813ecd51cd8",
+                                "alias": "recipient signature"
+                            }
+                        ]
+                    },
+                    "validators": [],
+                    "questionId": "121e3bb63b88c2",
+                    "number": 1
+                },
+                {
+                    "question": "options question name",
+                    "type": "options",
+                    "values": {
+                        "options": [
+                            "chase up key",
+                            "mark as returned"
+                        ],
+                        "multiple": "single",
+                        "none": false
+                    },
+                    "validators": [],
+                    "compulsory": true,
+                    "questionId": "869c758351548",
+                    "number": 2
+                }
+            ],
+            "navigation": {
+                "id": "121e3bb63b88c2",
+                "type": "node",
+                "parent": null,
+                "children": [
+                    {
+                        "id": "869c758351548",
+                        "type": "node",
+                        "parent": "121e3bb63b88c2",
+                        "children": [
+                            {
+                                "id": "85d0ae06c0ead",
+                                "type": "node",
+                                "parent": "869c758351548",
+                                "children": [],
+                                "rules": [
+                                    {
+                                        "type": "options",
+                                        "values": [
+                                            "chase up key"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "3966107d0e9c4e",
+                                "type": "node",
+                                "parent": "869c758351548",
+                                "children": [
+                                    {
+                                        "id": "2c4e1b54d6c6b8",
+                                        "type": "node",
+                                        "parent": "3966107d0e9c4e",
+                                        "children": [],
+                                        "rules": []
+                                    }
+                                ],
+                                "rules": [
+                                    {
+                                        "type": "options",
+                                        "values": [
+                                            "mark as returned"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "rules": []
+                    }
+                ]
+            },
+            "webhooks": [
+                {
+                    "name": "notify endpoint",
+                    "type": "notify",
+                    "url": "http://buttonkit:8080/api/v1/send",
+                    "method": "POST",
+                    "parameters": {
+                        "dynamic": [
+                            {
+                                "name": "your contact number",
+                                "type": "freetext",
+                                "id": "121e3bb63b88c2",
+                                "path": "9a75383b0fdc5"
+                            }
+                        ],
+                        "static": {
+                            "email": {
+                                "subject": "",
+                                "body": ""
+                            },
+                            "sms": {
+                                "body": "bring back the key!!"
+                            },
+                            "recipients": []
+                        }
+                    },
+                    "webhookId": "85d0ae06c0ead"
+                },
+                {
+                    "name": "log endpoint",
+                    "type": "log",
+                    "url": "http://buttonkit:8080/api/v1/datastore/log",
+                    "method": "POST",
+                    "contentType": "json",
+                    "parameters": {
+                        "dynamic": [
+                            "presser",
+                            "pressed"
+                        ],
+                        "static": {
+                            "_datastorename": "returned"
+                        }
+                    },
+                    "webhookId": "3966107d0e9c4e"
+                },
+                {
+                    "name": "delete log item",
+                    "type": "deletelogitem",
+                    "url": "http://buttonkit:8080/api/v1/datastore/delete/question",
+                    "method": "POST",
+                    "parameters": {
+                        "dynamic": [
+                            "121e3bb63b88c2"
+                        ],
+                        "static": {
+                            "questionId": "121e3bb63b88c2"
+                        }
+                    },
+                    "webhookId": "2c4e1b54d6c6b8"
+                }
+            ]
+        },
+        {
+            "buttonId": "141196ce7ce679",
+            "name": "returned",
+            "description": "returned keys",
+            "type": "action",
+            "questions": [
+                {
+                    "question": "returned",
+                    "type": "datastoreitem",
+                    "values": {
+                        "storeId": "returned",
+                        "schema": [
+                            {
+                                "id": "1a200b488ebc4d",
+                                "path": "121e3bb63b88c2,e1ee683f030e08,1a200b488ebc4d",
+                                "alias": "owner"
+                            },
+                            {
+                                "id": "26d3ba2ef67aa2",
+                                "path": "121e3bb63b88c2,e1ee683f030e08,26d3ba2ef67aa2",
+                                "alias": "recipient"
+                            },
+                            {
+                                "id": "4f9fa7b6373e74_pressed",
+                                "path": "121e3bb63b88c2,4f9fa7b6373e74_pressed",
+                                "alias": "return time"
+                            }
+                        ]
+                    },
+                    "validators": [],
+                    "questionId": "27c699e88f3bfe",
+                    "number": 1
+                }
+            ],
+            "navigation": {
+                "id": "27c699e88f3bfe",
+                "type": "node",
+                "parent": null,
+                "children": []
+            },
+            "webhooks": []
+        }
+    ]
+}
